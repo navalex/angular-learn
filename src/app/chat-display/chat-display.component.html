@@ -1,0 +1,28 @@
+<div class="card">
+  <div class="card-header">
+    Chat
+  </div>
+
+  <ul class="list-group list-group-flush list-messages">
+    <li class="list-group-item" *ngFor="let mess of chatService.messages; let i = index">
+      <div class="row">
+        <div class="col-10">
+          <p><b>{{ mess.author }}</b><br>{{ mess.content }}</p>
+        </div>
+        <div class="col-2 text-right">
+          <div class="row h-100">
+            <div class="col-12"><button class="btn btn-sm btn-danger" aria-hidden="true" (click)="removeMessage(i)">&times;</button></div>
+            <div class="col-12 align-self-end">{{ mess.date | date:'d/m/y - h:mm:s' }}</div>
+          </div>
+
+        </div>
+      </div>
+    </li>
+  </ul>
+
+  <div class="card-footer">
+    <form action="">
+      <input name="messageInput" id="messageInput" [(ngModel)]="userMessage" class="form-control" (keydown.enter)="pushMessage()" [disabled]="!userService.isAuth()" />
+    </form>
+  </div>
+</div>
